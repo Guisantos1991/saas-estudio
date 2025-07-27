@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import SetClient from "./pages/setClient";
-import Sales from "./pages/sales";
-import Calendar from "./pages/calendarClient";
-import Overview from "./pages/overview"
+import SetClient from "./pages/SetClient";
+import Sales from "./pages/Sales";
+import Calendar from "./pages/CalendarClient";
+import Overview from "./pages/Overview"
 export default function App() {
   return (
     <Routes>

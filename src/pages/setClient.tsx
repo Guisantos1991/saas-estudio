@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import "../styles/App.css";
 import "../styles/fonts.css";
-import SideBar from "../components/sideBar";
+import SideBar from "../components/SideBar";
 import Form from "../components/Form";
 
 
