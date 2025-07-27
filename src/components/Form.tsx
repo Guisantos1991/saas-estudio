@@ -1,111 +1,140 @@
+// src/components/Form.tsx
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import "../styles/Form.css";
+import { saveClient, type ClientData } from "../api/clientService";
+
+
+
+type FormData = ClientData & {
+  telefone: string;
+  atendenteResponsavel: string;
+  canalAtendimento: string;
+  observacoes?: string;
+};
 
 export default function Form() {
-  const { register } = useForm(); //
+  const { register, handleSubmit, reset } = useForm<FormData>();
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      const newId = await saveClient(data);
+      alert(`✅ Cliente “${data.nomeCriança}” salvo com ID ${newId}`);
+      reset();
+    } catch (err) {
+      console.error("❌ Erro ao salvar cliente:", err);
+      alert("❌ Falha ao salvar cliente. Veja o console.");
+    }
+  };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full gap-12 p-8">
-      <div className="flex flex-row gap-12 justify-center items-center w-full">
-        <div className="flex flex-col justify-center items-start gap-1 w-full">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col justify-center items-center w-full h-full gap-12"
+    >
+      {/* Linha 1: Nome Criança / Nome Responsável */}
+      <div className="flex flex-row gap-12 w-full">
+        <div className="flex flex-col gap-1 w-full">
           <label className="text-white font-sansation">Nome Criança</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="text"
-            {...register("nomeCriança")}
+            {...register("nomeCriança", { required: true })}
             placeholder="Digite o nome da criança"
-            className="text-white font-sansation border-2 border-white rounded-md p-2 outline-0 font-light w-full"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-full"
           />
         </div>
-        <div className="flex flex-col justify-center items-start gap-1 w-full">
+        <div className="flex flex-col gap-1 w-full">
           <label className="text-white font-sansation">Nome Responsável</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="text"
-            {...register("nomeResponsável")}
+            {...register("nomeResponsável", { required: true })}
             placeholder="Digite o nome do responsável"
-            className="text-white font-sansation border-2 border-white rounded-md p-2 outline-0 font-light w-full"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-full"
           />
         </div>
       </div>
 
-      <div className="flex flex-row gap-12 justify-start items-center w-full">
-        <div className="flex flex-col justify-center items-start gap-1">
+      {/* Linha 2: Datas e Telefone */}
+      <div className="flex flex-row gap-12 w-full">
+        <div className="flex flex-col gap-1">
           <label className="text-white font-sansation">Data Nascimento</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="date"
             {...register("dataNascimento")}
-            className="text-white font-sansation w-80 border-2 border-white rounded-md p-2 outline-0 font-light"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-80"
           />
         </div>
-        <div className="flex flex-col justify-center items-start gap-1">
+        <div className="flex flex-col gap-1">
           <label className="text-white font-sansation">Data Cadastro</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="date"
             {...register("dataCadastro")}
-            className="text-white font-sansation w-80 border-2 border-white rounded-md p-2 outline-0 font-light"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-80"
           />
         </div>
-        <div className="flex flex-col justify-center items-start gap-1">
+        <div className="flex flex-col gap-1">
           <label className="text-white font-sansation">Telefone</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="tel"
             {...register("telefone")}
             placeholder="(xx) xxxxx-xxxx"
-            className="text-white font-sansation w-80 border-2 border-white rounded-md p-2 outline-0 font-light"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-80"
           />
         </div>
       </div>
 
-      <div className="flex flex-row gap-12 justify-start items-center w-full">
-        <div className="flex flex-col justify-center items-start gap-1 ">
-          <label className="text-white font-sansation">Atendimento</label>
+      {/* Linha 3: Atendente / Canal de Atendimento */}
+      <div className="flex flex-row gap-12 w-full">
+        <div className="flex flex-col gap-1">
+          <label className="text-white font-sansation">Atendente Responsável</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="text"
             {...register("atendenteResponsavel")}
-            placeholder="Funcionário resposável pelo atendimento"
-            className="text-white font-sansation border-2 border-white rounded-md p-2 outline-0 font-light w-80"
+            placeholder="Funcionário responsável"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-80"
           />
         </div>
-        <div className="flex flex-col justify-center items-start gap-1 ">
-          <label className="text-white font-sansation">Recebido por:</label>
+        <div className="flex flex-col gap-1">
+          <label className="text-white font-sansation">Canal de Atendimento</label>
           <motion.select
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             {...register("canalAtendimento")}
-            className="text-white font-sansation border-2 border-white rounded-md p-2 outline-0 font-light w-80"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-80 bg-transparent"
           >
             <option value="">Selecione</option>
-            <option value="1">Instagram</option>
-            <option value="2">WhatsApp</option>
-            <option value="3">Outros</option>
+            <option value="instagram">Instagram</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="outros">Outros</option>
           </motion.select>
         </div>
       </div>
 
-      <div className="flex flex-row gap-12 justify-center items-center w-full">
-        
-        <div className="flex flex-col justify-center items-start gap-1 w-full">
-          <label className="text-white font-sansation">Observações</label>
-          <motion.textarea
-            whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
-            {...register("nomeResponsável")}
-            placeholder="Adicione aqui uma observação"
-            className="text-white font-sansation border-2 border-white rounded-md p-2 outline-0 font-light w-180 h-36"
-          />
-        </div>
+      {/* Observações */}
+      <div className="flex flex-col gap-1 w-full">
+        <label className="text-white font-sansation">Observações</label>
+        <motion.textarea
+          whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
+          {...register("observacoes")}
+          placeholder="Adicione aqui uma observação"
+          className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-full h-36"
+        />
       </div>
-      <motion.button whileHover={{ scale: 1.1, boxShadow: "0px 0px 10px 1px white", cursor:"pointer" }}
-      whileTap={{ scale: 0.9 }}
-      className="w-60 h-12 bg-gray-500 rounded-md text-white font-sansation"
-      >Salvar Cliente
+
+      {/* Botão de Submit */}
+      <motion.button
+        type="submit"
+        whileHover={{ scale: 1.1, boxShadow: "0px 0px 10px 1px white", cursor: "pointer" }}
+        whileTap={{ scale: 0.9 }}
+        className="w-60 h-12 bg-gray-500 rounded-md text-white font-sansation"
+      >
+        Salvar Cliente
       </motion.button>
-    </div>
+    </form>
   );
 }
-
-//
