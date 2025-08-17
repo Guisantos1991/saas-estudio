@@ -10,8 +10,5 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
   ],
-  base: '/saas-estudio/',
-  build: {
-    outDir: 'dist',
-  }
+  base: '/'
 })
