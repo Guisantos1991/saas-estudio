@@ -4,18 +4,16 @@ import Sales from './pages/Sales';
 import Calendar from './pages/CalendarClient';
 import Overview from './pages/Overview';
 import './styles/App.css';
-import Background from './components/Background';
 
- function App() {
+function App() {
   return (
-    <Router>
+    <Router basename="/saas-estudio">
       <div className="App">
-        <Background />
         <Routes>
           <Route path="/" element={<SetClient />} />
-          <Route path="/sales" element={<Sales />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/overview" element={<Overview />} />
+          <Route path="/Sales" element={<Sales />} />
+          <Route path="/CalendarClient" element={<Calendar />} />
+          <Route path="/Overview" element={<Overview />} />
         </Routes>
       </div>
     </Router>
