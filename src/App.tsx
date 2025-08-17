@@ -4,11 +4,13 @@ import Sales from './pages/Sales';
 import Calendar from './pages/CalendarClient';
 import Overview from './pages/Overview';
 import './styles/App.css';
+import Background from './components/Background';
 
-function App() {
+ function App() {
   return (
     <Router>
       <div className="App">
+        <Background />
         <Routes>
           <Route path="/" element={<SetClient />} />
           <Route path="/sales" element={<Sales />} />
