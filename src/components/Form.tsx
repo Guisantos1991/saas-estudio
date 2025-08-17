@@ -9,6 +9,7 @@ import { saveClient, type ClientData } from "../api/clientService";
 type FormData = ClientData & {
   telefone: string;
   atendenteResponsavel: string;
+  email: string;
   canalAtendimento: string;
   observacoes?: string;
 };
@@ -30,7 +31,7 @@ export default function Form() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-center items-center w-full h-full gap-12"
+      className="flex flex-col justify-center items-center w-full h-full gap-6"
     >
       {/* Linha 1: Nome Criança / Nome Responsável */}
       <div className="flex flex-row gap-12 w-full">
@@ -51,6 +52,19 @@ export default function Form() {
             type="text"
             {...register("nomeResponsável", { required: true })}
             placeholder="Digite o nome do responsável"
+            className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-full"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-row gap-12 w-full">
+        <div className="flex flex-col gap-1 w-1/2">
+          <label className="text-white font-sansation">E-mail Responsável</label>
+          <motion.input
+            whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
+            type="email"
+            {...register("email", { required: true })}
+            placeholder="Digite o nome da criança"
             className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-full"
           />
         </div>

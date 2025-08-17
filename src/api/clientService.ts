@@ -10,6 +10,8 @@ export type ClientData = {
   nomeResponsável: string;
   dataNascimento: string;
   dataCadastro: string;
+  telefone: string;
+  email: string;
   canalAtendimento: string;
   observação?: string;
 };

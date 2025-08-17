@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import SetClient from "./pages/SetClient";
 import Sales from "./pages/Sales";
-import Calendar from "./pages/CalendarClient";
+import CalendarClient from "./pages/CalendarClient";
 import Overview from "./pages/Overview"
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
       <Route path="/" element={<SetClient />} />
       <Route path="/cadastro" element={<SetClient />} />
       <Route path="/vendas" element={<Sales />} />
-      <Route path="/agenda" element={<Calendar />} />
+      <Route path="/agenda" element={<CalendarClient />} />
       <Route path="/admin" element={<Overview />} />
     </Routes>
   );

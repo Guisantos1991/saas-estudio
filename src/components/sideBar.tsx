@@ -21,6 +21,7 @@ export default function SideBar() {
               ease: "linear", // giro constante
             }}
           />
+          <Link to={"/cadastro"}>
           <motion.div
             whileHover={{ outline: "3px solid #034078", backgroundColor:"ice", boxShadow: "5px 5px 5px 2px #034078"}}
             whileTap={{ scale: 0.9 }}
@@ -34,6 +35,7 @@ export default function SideBar() {
             />
             <h1 className="text-l">Cadastro</h1>
           </motion.div>
+          </Link>
           <Link to="/vendas" >
           <motion.div
             whileHover={{ outline: "3px solid #034078", backgroundColor:"ice", boxShadow: "5px 5px 5px 2px #034078"}}

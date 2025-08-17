@@ -1,3 +1,9 @@
+import "../styles/form.css"
+
+
+
+
+
 export default function ClientInfo() {
 
 return (
