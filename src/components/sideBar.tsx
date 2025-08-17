@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../styles/App.css";
 
-
-
 export default function SideBar() {
     return (
         <>
@@ -15,13 +13,13 @@ export default function SideBar() {
             className="w-24 h-24 rounded-full mt-4 p-1 mb-4"
             animate={{ rotate: 360 }}
             transition={{
-              repeat: Infinity, // 🔁 loop infinito
-              repeatType: "loop", // padrão de repetição
-              duration: 30, // segundos para uma volta completa
-              ease: "linear", // giro constante
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 30,
+              ease: "linear",
             }}
           />
-          <Link to={"/cadastro"}>
+          <Link to={"/"}>
           <motion.div
             whileHover={{ outline: "3px solid #034078", backgroundColor:"ice", boxShadow: "5px 5px 5px 2px #034078"}}
             whileTap={{ scale: 0.9 }}
@@ -36,7 +34,7 @@ export default function SideBar() {
             <h1 className="text-l">Cadastro</h1>
           </motion.div>
           </Link>
-          <Link to="/vendas" >
+          <Link to="/sales" >
           <motion.div
             whileHover={{ outline: "3px solid #034078", backgroundColor:"ice", boxShadow: "5px 5px 5px 2px #034078"}}
             whileTap={{ scale: 0.9 }}
@@ -51,6 +49,7 @@ export default function SideBar() {
             <h1 className="text-l">Vendas</h1>
           </motion.div>
           </Link>
+          <Link to="/calendar">
           <motion.div
             whileHover={{ outline: "3px solid #034078", backgroundColor:"ice", boxShadow: "5px 5px 5px 2px #034078"}}
             whileTap={{ scale: 0.9 }}
@@ -64,6 +63,8 @@ export default function SideBar() {
             />
             <h1 className="text-l">Agenda</h1>
           </motion.div>
+          </Link>
+          <Link to="/overview">
           <motion.div
             whileHover={{ outline: "3px solid #034078", backgroundColor:"ice", boxShadow: "5px 5px 5px 2px #034078"}}
             whileTap={{ scale: 0.9 }}
@@ -77,6 +78,7 @@ export default function SideBar() {
             />
             <h1 className="text-l font">Admin</h1>
           </motion.div>
+          </Link>
         
         </>
     )

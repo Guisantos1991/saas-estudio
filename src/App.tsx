@@ -1,16 +1,23 @@
-import { Routes, Route } from "react-router-dom";
-import SetClient from "./pages/SetClient";
-import Sales from "./pages/Sales";
-import CalendarClient from "./pages/CalendarClient";
-import Overview from "./pages/Overview"
-export default function App() {
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SetClient from './pages/SetClient';
+import Sales from './pages/Sales';
+import Calendar from './pages/CalendarClient';
+import Overview from './pages/Overview';
+import './styles/App.css';
+
+function App() {
   return (
-    <Routes>
-      <Route path="/" element={<SetClient />} />
-      <Route path="/cadastro" element={<SetClient />} />
-      <Route path="/vendas" element={<Sales />} />
-      <Route path="/agenda" element={<CalendarClient />} />
-      <Route path="/admin" element={<Overview />} />
-    </Routes>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<SetClient />} />
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/overview" element={<Overview />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
+export default App;
