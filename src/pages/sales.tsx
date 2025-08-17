@@ -5,7 +5,7 @@ import SideBar from "../components/SideBar";
 import SalesForm from "../components/SalesForm"
 
 
-export default function SetClient() {
+export default function Sales() {
   return (
     <>
       <motion.div

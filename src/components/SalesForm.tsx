@@ -1,20 +1,37 @@
-
 import "../styles/Form.css"
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 
-
-
+type FormValues = {
+  tipoEnsaio: string;
+  dataEnsaio: string;
+  dataVenda: string;
+  quantidadeFotos: number;
+  fotosExtras: number;
+  album: string;
+  dataEntrega?: string;
+  dataNascimento?: string;
+  dataCadastro?: string;
+  telefone?: string;
+  atendenteResponsavel?: string;
+  canalAtendimento?: string;
+  observacoes?: string;
+};
 
 
 export default function SalesForm() {
-    const { register, handleSubmit, reset } = useForm<FormData>();
+    const { register, handleSubmit, reset } = useForm<FormValues>();
+
+    const onSubmit = (data: FormValues) => {
+      console.log('Sales form data:', data);
+      reset();
+    };
     
 
     return (
 
         <div className="w-full h-full p-2">
-            <form
+            <form onSubmit={handleSubmit(onSubmit)}
       
       className="flex flex-col justify-center items-center w-full h-full gap-2 p-4"
     >
@@ -74,7 +91,7 @@ export default function SalesForm() {
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="number"
-            {...register("dataEnsaio", { required: true })}
+            {...register("quantidadeFotos", { required: true, valueAsNumber: true })}
             className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-38"
           />
         </div>
@@ -83,7 +100,7 @@ export default function SalesForm() {
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="number"
-            {...register("dataEnsaio", { required: true })}
+            {...register("fotosExtras", { valueAsNumber: true })}
             className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-38"
           />
         </div>
@@ -101,11 +118,11 @@ export default function SalesForm() {
           </motion.select>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <label className="text-white font-sansation">Data Ensaio:</label>
+          <label className="text-white font-sansation">Data Entrega:</label>
           <motion.input
             whileFocus={{ boxShadow: "0px 0px 10px 1px white" }}
             type="date"
-            {...register("dataEnsaio", { required: true })}
+            {...register("dataEntrega")}
             className="text-white border-2 border-white rounded-md p-2 outline-0 font-light w-38"
           />
         </div>
